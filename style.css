@@ -1,0 +1,12 @@
+#container  {
+    margin: 30px;
+    /* display: flex; */
+    justify-content: space-between;
+    width: 100px;
+}
+
+.grid-o-divs {
+    width: 8px;
+    background-color: lightblue;
+
+}
