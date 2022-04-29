@@ -1,12 +1,17 @@
-#container  {
-    margin: 30px;
-    /* display: flex; */
-    justify-content: space-between;
-    width: 100px;
+*   {
+    box-sizing: border-box;
 }
 
-.grid-o-divs {
-    width: 8px;
-    background-color: lightblue;
+#container  {
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 160px;
+    flex-wrap: wrap;
+}
 
+.gridDivs {
+    background-color: lightblue;
+    justify-content: center;
 }
