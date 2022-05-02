@@ -3,15 +3,15 @@
 }
 
 #container  {
-    margin: 200px;
-    display: flex;
+    margin: 150px;
     width: 640px;
+    height: 640px;
+    display: flex;
     flex-wrap: wrap;
 }
 
 .gridDivs {
     background-color: rgb(230, 189, 173);
-    /* justify-content: center; */
 }
 
 /* .gridDivs:hover {
@@ -20,4 +20,9 @@
 
   .paint        {
       background-color: #7106d5;
+  }
+
+  .myButtons {
+      display: flex;
+      justify-content: center;
   }
