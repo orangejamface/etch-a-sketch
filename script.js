@@ -42,11 +42,15 @@ function reset() {   //function to remove board and then create new board
 }
 
 
+container.addEventListener('mousedown', mouseIsDown)
 
-
-
-function changeColor (e) {    //function to change background color, function will be called when mouseove event occurs
-  e.target.style.backgroundColor = '#8a2be2';
+function mouseIsDown() {  //function to change color when clicked, and keep track of where mouse is with sperate color.
+  container.addEventListener('mouseout', function(e)  {
+    e.target.style.backgroundColor = '#8a2be2';
+  }); 
+  container.onmousemove = function(e) {
+    e.target.style.backgroundColor = '#000000';
+  }
 }
 
 
@@ -83,9 +87,8 @@ function createEtchBoard() {        //function to create board inside container 
     };
 };
 
-    createEtchBoard();
-    container.addEventListener('mouseover', changeColor) 
 
+createEtchBoard();
 
 
 
