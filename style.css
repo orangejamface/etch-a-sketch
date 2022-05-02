@@ -3,13 +3,21 @@
 }
 
 #container  {
-    margin: 30px;
+    margin: 200px;
     display: flex;
-    width: 160px;
+    width: 640px;
     flex-wrap: wrap;
 }
 
 .gridDivs {
-    background-color: lightblue;
-    justify-content: center;
+    background-color: rgb(230, 189, 173);
+    /* justify-content: center; */
 }
+
+/* .gridDivs:hover {
+    background-color: yellow;
+  } */
+
+  .paint        {
+      background-color: #7106d5;
+  }
