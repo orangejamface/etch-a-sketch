@@ -1,8 +1,8 @@
 const container = document.querySelector('#container'); //target container to place 16 divs within
-let divAmount = 16;  // the amount of divs
-let square = document.querySelector('.gridDivs');
+let divAmount = 16;  
+// let square = document.querySelector('.gridDivs');
 
-let reset8 = document.querySelector('.btn8');
+let reset8 = document.querySelector('.btn8');  // reset etch grid buttons to different sizes
 reset8.addEventListener('click', create8);
 let reset16 = document.querySelector('.btn16');
 reset16.addEventListener('click', create16);
@@ -34,6 +34,7 @@ function create128() {
   reset();
 }
 
+
 function reset() {   //function to remove board and then create new board 
   while (container.firstChild) {
     container.removeChild(container.lastChild);
@@ -44,18 +45,27 @@ function reset() {   //function to remove board and then create new board
 
 container.addEventListener('mousedown', mouseIsDown)
 
-function mouseIsDown() {  //function to change color when clicked, and keep track of where mouse is with sperate color.
-  container.addEventListener('mouseout', function(e)  {
-    e.target.style.backgroundColor = '#8a2be2';
-  }); 
-  container.onmousemove = function(e) {
-    e.target.style.backgroundColor = '#000000';
-  }
+let clicking = true;
+document.addEventListener("mouseup", ceaseClick);
+function ceaseClick(){  
+  clicking = false;
 }
 
+function mouseIsDown() {  //function to change color when clicked
+  container.addEventListener('mouseout', function(e)  {
+    if (!clicking) return; // exit painting onec clicking has ceased
+    e.target.style.backgroundColor = '#8a2be2';
+  }); 
+  clicking = true; //set click back to true ready for next mouseIsDown function call
+}
+
+  // container.onmousemove = function(e) {
+  //   e.target.style.backgroundColor = '#000000';
+  // }
 
 
-function createEtchBoard() {        //function to create board inside container div
+
+function createEtchBoard() {        //function to create etch board inside container div
     for (i = 0; i < divAmount*divAmount; i ++ ) {
         let boardDiv = document.createElement("div");
         boardDiv.className = "gridDivs";
