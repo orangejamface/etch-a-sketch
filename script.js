@@ -71,7 +71,7 @@ function paintShade() {
   paintColor = '#ffffff'
 };
 
-container.addEventListener('mousedown', mouseIsDown)
+container.addEventListener('mousedown', mouseIsDown) //trigger function to paint/change color of background when mouse click is held down
 let clicking = true;
 document.addEventListener("mouseup", ceaseClick);
 function ceaseClick(){  
@@ -80,7 +80,7 @@ function ceaseClick(){
 
 function mouseIsDown() {  //function to change color when clicked
   container.addEventListener('mouseover', function(e)  {
-    if (!clicking) return; // exit painting onec clicking has ceased
+    if (!clicking) return; // exit painting once clicking has ceased
     e.target.style.backgroundColor = paintColor;
   }); 
   clicking = true; //set click back to true ready for next mouseIsDown function call
