@@ -52,16 +52,27 @@ function ceaseClick(){
 }
 
 function mouseIsDown() {  //function to change color when clicked
-  container.addEventListener('mouseout', function(e)  {
+  container.addEventListener('mouseover', function(e)  {
     if (!clicking) return; // exit painting onec clicking has ceased
     e.target.style.backgroundColor = '#8a2be2';
   }); 
   clicking = true; //set click back to true ready for next mouseIsDown function call
 }
 
-  // container.onmousemove = function(e) {
-  //   e.target.style.backgroundColor = '#000000';
-  // }
+
+container.addEventListener('touchstart', touchingScreen) //basically a repear of lines 46-60 but altered to work with a touchscreen
+let touching = true;  
+document.addEventListener("touchend", ceaseTouch);
+function ceaseTouch(){  
+  touching = false;
+}
+function touchingScreen() {  
+  container.addEventListener('touchmove', function(e)  {
+    if (!touching) return; 
+    e.target.style.backgroundColor = '#8a2be2';
+  }); 
+  touching = true; 
+}
 
 
 
@@ -70,28 +81,28 @@ function createEtchBoard() {        //function to create etch board inside conta
         let boardDiv = document.createElement("div");
         boardDiv.className = "gridDivs";
 
-        if (divAmount === 16) {    //board paintable square sizes depend on value of boardDiv, this is 16 by default but set by buttons pressed when reseting
-          boardDiv.style.cssText = `border: 1px solid white; width: 40px; height: 40px;`;  
+        if (divAmount === 16) {    //etchboard square sizes depend on value of boardDiv, this is 16 by default but set by buttons pressed when reseting
+          boardDiv.style.cssText = `width: 40px; height: 40px;`;  
           container.appendChild(boardDiv);
         }
         else if (divAmount === 8 )
         {
-          boardDiv.style.cssText = `border: 1px solid white; width:80px; height: 80px;`; 
+          boardDiv.style.cssText = `width:80px; height: 80px;`; 
           container.appendChild(boardDiv);
         }
         else if (divAmount === 32 )
         {
-          boardDiv.style.cssText = `border: 1px solid white; width:20px; height: 20px;`;  
+          boardDiv.style.cssText = `width:20px; height: 20px;`;  
           container.appendChild(boardDiv);
         }
         else if (divAmount === 64 )
         {
-          boardDiv.style.cssText = `border: 1px solid white; width:10px; height: 10px;`;  
+          boardDiv.style.cssText = `width:10px; height: 10px;`;  
           container.appendChild(boardDiv);
         }
         else if (divAmount === 128 )
         {
-          boardDiv.style.cssText = `border: 1px solid white; width:5px; height: 5px;`;  
+          boardDiv.style.cssText = `width:5px; height: 5px;`;  
           container.appendChild(boardDiv);
         }
     };

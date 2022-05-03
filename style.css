@@ -14,13 +14,13 @@
     background-color: rgb(230, 189, 173);
 }
 
-/* .gridDivs:hover {
+.gridDivs:hover {
     background-color: yellow;
-  } */
-
-  .paint        {
-      background-color: #7106d5;
   }
+
+  /* .paint        {
+      background-color: #7106d5;
+  } */
 
   .myButtons {
       display: flex;
