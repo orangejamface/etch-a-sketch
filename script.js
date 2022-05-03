@@ -1,8 +1,8 @@
 const container = document.querySelector('#container'); //target container to place 16 divs within
 let divAmount = 16;  
-// let square = document.querySelector('.gridDivs');
 
-let reset8 = document.querySelector('.btn8');  // reset etch grid buttons to different sizes
+// reset etch grid buttons to different sizes
+let reset8 = document.querySelector('.btn8');  
 reset8.addEventListener('click', create8);
 let reset16 = document.querySelector('.btn16');
 reset16.addEventListener('click', create16);
@@ -13,6 +13,7 @@ reset64.addEventListener('click', create64);
 let reset128 = document.querySelector('.btn128');
 reset128.addEventListener('click', create128);
 
+// corresponding functions for new grid sizes
 function create8() {
   divAmount = 8;
   reset();
@@ -35,16 +36,42 @@ function create128() {
 }
 
 
-function reset() {   //function to remove board and then create new board 
+function reset() {   // function to remove board and then create new board, called within new board functions above, which is triggered by buttonevent listener
   while (container.firstChild) {
     container.removeChild(container.lastChild);
   }
   createEtchBoard();
 }
 
+let colorRed = document.querySelector('.btnRed');  
+colorRed.addEventListener('click', paintRed);
+let colorGreen = document.querySelector('.btnGreen');
+colorGreen.addEventListener('click', paintGreen);
+let colorBlue = document.querySelector('.btnBlue');
+colorBlue.addEventListener('click', paintBlue);
+let colorMulti = document.querySelector('.btnMulti');
+colorMulti.addEventListener('click', paintMulti);
+let colorShade = document.querySelector('.btnShade');
+colorShade.addEventListener('click', paintShade);
+
+let paintColor = '#8a2be2'; //default color
+function paintRed() {
+  paintColor = '#ff0000'
+};
+function paintGreen() {
+  paintColor = '#229d00'
+};
+function paintBlue() {
+  paintColor = '#3c00ff'
+};
+function paintMulti() {
+  paintColor = '#000000'
+};
+function paintShade() {
+  paintColor = '#ffffff'
+};
 
 container.addEventListener('mousedown', mouseIsDown)
-
 let clicking = true;
 document.addEventListener("mouseup", ceaseClick);
 function ceaseClick(){  
@@ -54,7 +81,7 @@ function ceaseClick(){
 function mouseIsDown() {  //function to change color when clicked
   container.addEventListener('mouseover', function(e)  {
     if (!clicking) return; // exit painting onec clicking has ceased
-    e.target.style.backgroundColor = '#8a2be2';
+    e.target.style.backgroundColor = paintColor;
   }); 
   clicking = true; //set click back to true ready for next mouseIsDown function call
 }

@@ -22,7 +22,7 @@
       background-color: #7106d5;
   } */
 
-  .myButtons {
+  .sizeButtons, .colorButtons {
       display: flex;
       justify-content: center;
   }
