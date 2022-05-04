@@ -47,6 +47,8 @@ function reset() {   // function to remove board and then create new board, call
   createEtchBoard();
 }
 
+let colorPurple = document.querySelector('.btnPurple');  
+colorPurple.addEventListener('click', paintPurple);
 let colorRed = document.querySelector('.btnRed');  
 colorRed.addEventListener('click', paintRed);
 let colorGreen = document.querySelector('.btnGreen');
@@ -61,9 +63,13 @@ colorShade.addEventListener('click', paintShade);
 let paintColor = '#8a2be2'; //default color
 let red = '#ff0000';
 
+function paintPurple() {
+  container.removeEventListener('mouseover', randomColor);
+  paintColor = '#8a2be2';
+};
 function paintRed() {
   container.removeEventListener('mouseover', randomColor);
-  paintColor = red
+  paintColor = red;
 };
 function paintGreen() {
   container.removeEventListener('mouseover', randomColor);
@@ -79,22 +85,26 @@ function paintMulti() {
 };
 function paintShade() {
   container.removeEventListener('mouseover', randomColor);
-  paintColor = '#ffffff'
+  paintColor = '#cdcdcd';
 };
 
 let rgb;
-
 function randomColor() {
   paintColor = `rgb(${numGen(255)},${numGen(255)},${numGen(255)})`
 }
-
-
 
 container.addEventListener('mousedown', painting) //trigger function to paint/change color of background when mouse click is held down
 let clicking = true;
 document.addEventListener("mouseup", ceaseClick);
 function ceaseClick(){  
   clicking = false;
+}
+
+function mediumGrey() {
+  paintColor = '#8e8e8e';
+}
+function darkerGrey() {
+  paintColor = '#737373';
 }
 
 
@@ -105,9 +115,16 @@ function painting() {  //function to change color when clicked
       container.addEventListener('mouseover', randomColor);
     }
       e.target.style.backgroundColor = paintColor
+    if (paintColor === '#cdcdcd') {
+      container.addEventListener('mouseup', mediumGrey);
+    }
+    if (paintColor === '#8e8e8e') {
+      container.addEventListener('mouseup', darkerGrey);
+    }
   }); 
   clicking = true; //set click back to true ready for next mouseIsDown function call
 }
+
 
 
 container.addEventListener('touchstart', touchingScreen) //basically a repear of lines 46-60 but altered to work with a touchscreen
