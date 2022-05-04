@@ -1,6 +1,10 @@
 const container = document.querySelector('#container'); //target container to place 16 divs within
 let divAmount = 16;  
 
+function numGen(mx) {  //random number between 0 and 255 function
+  return Math.floor(Math.random() * mx);
+}
+
 // reset etch grid buttons to different sizes
 let reset8 = document.querySelector('.btn8');  
 reset8.addEventListener('click', create8);
@@ -55,33 +59,52 @@ let colorShade = document.querySelector('.btnShade');
 colorShade.addEventListener('click', paintShade);
 
 let paintColor = '#8a2be2'; //default color
+let red = '#ff0000';
+
 function paintRed() {
-  paintColor = '#ff0000'
+  container.removeEventListener('mouseover', randomColor);
+  paintColor = red
 };
 function paintGreen() {
+  container.removeEventListener('mouseover', randomColor);
   paintColor = '#229d00'
 };
 function paintBlue() {
+  container.removeEventListener('mouseover', randomColor);
   paintColor = '#3c00ff'
 };
 function paintMulti() {
-  paintColor = '#000000'
+  container.removeEventListener('mouseover', randomColor);
+  paintColor = rgb;
 };
 function paintShade() {
+  container.removeEventListener('mouseover', randomColor);
   paintColor = '#ffffff'
 };
 
-container.addEventListener('mousedown', mouseIsDown) //trigger function to paint/change color of background when mouse click is held down
+let rgb;
+
+function randomColor() {
+  paintColor = `rgb(${numGen(255)},${numGen(255)},${numGen(255)})`
+}
+
+
+
+container.addEventListener('mousedown', painting) //trigger function to paint/change color of background when mouse click is held down
 let clicking = true;
 document.addEventListener("mouseup", ceaseClick);
 function ceaseClick(){  
   clicking = false;
 }
 
-function mouseIsDown() {  //function to change color when clicked
+
+function painting() {  //function to change color when clicked
   container.addEventListener('mouseover', function(e)  {
-    if (!clicking) return; // exit painting once clicking has ceased
-    e.target.style.backgroundColor = paintColor;
+    if (!clicking) return;  // exit painting once clicking has ceased
+    if (paintColor === rgb) {
+      container.addEventListener('mouseover', randomColor);
+    }
+      e.target.style.backgroundColor = paintColor
   }); 
   clicking = true; //set click back to true ready for next mouseIsDown function call
 }
@@ -100,8 +123,6 @@ function touchingScreen() {
   }); 
   touching = true; 
 }
-
-
 
 function createEtchBoard() {        //function to create etch board inside container div
     for (i = 0; i < divAmount*divAmount; i ++ ) {
