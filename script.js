@@ -17,6 +17,15 @@ reset64.addEventListener('click', create64);
 let reset128 = document.querySelector('.btn128');
 reset128.addEventListener('click', create128);
 
+// paint colors
+let purple = '#8a2be2';
+let red = '#ff0000';
+let green = '#229d00';
+let blue = '#3c00ff';
+let shade1 = '#cdcdcd';
+let paintColor = purple; //default color
+
+
 // corresponding functions for new grid sizes
 function create8() {
   divAmount = 8;
@@ -39,8 +48,8 @@ function create128() {
   reset();
 }
 
-
-function reset() {   // function to remove board and then create new board, called within new board functions above, which is triggered by buttonevent listener
+// function to remove board and then create new board, called within new board functions above, which is triggered by buttonevent listener
+function reset() {   
   while (container.firstChild) {
     container.removeChild(container.lastChild);
   }
@@ -60,12 +69,10 @@ colorMulti.addEventListener('click', paintMulti);
 let colorShade = document.querySelector('.btnShade');
 colorShade.addEventListener('click', paintShade);
 
-let paintColor = '#8a2be2'; //default color
-let red = '#ff0000';
 
 function paintPurple() {
   container.removeEventListener('mouseover', randomColor);
-  paintColor = '#8a2be2';
+  paintColor = purple;
 };
 function paintRed() {
   container.removeEventListener('mouseover', randomColor);
@@ -73,11 +80,11 @@ function paintRed() {
 };
 function paintGreen() {
   container.removeEventListener('mouseover', randomColor);
-  paintColor = '#229d00'
+  paintColor = green;
 };
 function paintBlue() {
   container.removeEventListener('mouseover', randomColor);
-  paintColor = '#3c00ff'
+  paintColor = blue;
 };
 function paintMulti() {
   container.removeEventListener('mouseover', randomColor);
@@ -85,68 +92,61 @@ function paintMulti() {
 };
 function paintShade() {
   container.removeEventListener('mouseover', randomColor);
-  paintColor = '#cdcdcd';
+  paintColor = shade1;
 };
-
 let rgb;
 function randomColor() {
   paintColor = `rgb(${numGen(255)},${numGen(255)},${numGen(255)})`
 }
 
-container.addEventListener('mousedown', painting) //trigger function to paint/change color of background when mouse click is held down
+
+//trigger function to paint/change color of background when mouse click is held down
+container.addEventListener('mousedown', painting) 
+
 let clicking = true;
+//set clicking to false when not clicking, this exits out of the paint event in the next function
 document.addEventListener("mouseup", ceaseClick);
 function ceaseClick(){  
   clicking = false;
 }
 
-function mediumGrey() {
-  paintColor = '#8e8e8e';
-}
-function darkerGrey() {
-  paintColor = '#737373';
-}
-
-
-function painting() {  //function to change color when clicked
+function painting() {  
   container.addEventListener('mouseover', function(e)  {
     if (!clicking) return;  // exit painting once clicking has ceased
     if (paintColor === rgb) {
       container.addEventListener('mouseover', randomColor);
     }
-      e.target.style.backgroundColor = paintColor
-    if (paintColor === '#cdcdcd') {
-      container.addEventListener('mouseup', mediumGrey);
+    if (paintColor === shade1)  {
+      shading();
     }
-    if (paintColor === '#8e8e8e') {
-      container.addEventListener('mouseup', darkerGrey);
-    }
+    e.target.style.backgroundColor = paintColor
   }); 
   clicking = true; //set click back to true ready for next mouseIsDown function call
 }
 
 
 
-container.addEventListener('touchstart', touchingScreen) //basically a repear of lines 46-60 but altered to work with a touchscreen
-let touching = true;  
-document.addEventListener("touchend", ceaseTouch);
-function ceaseTouch(){  
-  touching = false;
+//UNFINISHED SHADING MODE
+function shading() {
+  container.addEventListener('mouseover', function(e) {
+      if (!clicking) return; 
+    e.target.style.backgroundColor = paintColor
+    container.addEventListener('mouseover', checkShade1)
+  });
 }
-function touchingScreen() {  
-  container.addEventListener('touchmove', function(e)  {
-    if (!touching) return; 
-    e.target.style.backgroundColor = '#8a2be2';
-  }); 
-  touching = true; 
+let checkShade = false;
+function checkShade1() {
+    // console.log('hello')
 }
 
-function createEtchBoard() {        //function to create etch board inside container div
+
+//function to create etch board inside container div
+function createEtchBoard() {        
     for (i = 0; i < divAmount*divAmount; i ++ ) {
         let boardDiv = document.createElement("div");
         boardDiv.className = "gridDivs";
-
-        if (divAmount === 16) {    //etchboard square sizes depend on value of boardDiv, this is 16 by default but set by buttons pressed when reseting
+//etchboard square sizes depend on value of boardDiv, this is 16 by default but set by buttons pressed when reseting
+        if (divAmount === 16) {  
           boardDiv.style.cssText = `width: 40px; height: 40px;`;  
           container.appendChild(boardDiv);
         }
@@ -175,6 +175,28 @@ function createEtchBoard() {        //function to create etch board inside conta
 
 
 createEtchBoard();
+
+
+
+
+
+// BELOW IS THE BEGGINING OF TOUCHSCREEN COMPATABILITY, NEEDS RESEARCH!
+
+// container.addEventListener('touchstart', touchingScreen) 
+// let touching = true;  
+// document.addEventListener("touchend", ceaseTouch);
+// function ceaseTouch(){  
+//   touching = false;
+// }
+// function touchingScreen() {  
+//   container.addEventListener('touchmove', function(e)  {
+//     if (!touching) return; 
+//     e.target.style.backgroundColor = '#8a2be2';
+//   }); 
+//   touching = true; 
+// }
+
+
 
 
 
